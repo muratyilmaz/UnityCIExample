@@ -6,8 +6,6 @@ on:
 env:
   # License
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-  # Project
-  UNITY_VERSION: 2021.3.8f1
 
 jobs:
   buildForWindows:
@@ -28,10 +26,9 @@ jobs:
           path: Library
           key: Library-${{ matrix.targetPlatform }}
           restore-keys: Library-
-      - uses: game-ci/unity-builder@v2.0.4
+      - uses: game-ci/unity-builder@v2.1.0
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
-          unityVersion: ${{ env.UNITY_VERSION }}
       - uses: actions/upload-artifact@v2
         with:
           name: Build-${{ matrix.targetPlatform }}
