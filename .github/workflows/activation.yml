@@ -5,7 +5,12 @@ on: workflow_dispatch
 jobs:
   requestManualActivationFile:
     name: Request manual activation file 🔑
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        unityVersion:
+         - 2021.3.8f1
     steps:
       - uses: actions/checkout@v2
 
@@ -15,4 +20,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Manual Activation File
+          unityVersion: ${{ matrix.unityVersion }}
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
