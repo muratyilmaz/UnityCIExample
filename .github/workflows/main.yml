@@ -10,7 +10,7 @@ env:
 jobs:
   buildForWindows:
     name: "Build for windows"
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
@@ -24,8 +24,10 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: Library
-          key: Library-${{ matrix.targetPlatform }}
-          restore-keys: Library-
+          key: Library-macos-${{ matrix.targetPlatform }}
+          restore-keys: | 
+            Library-macos-
+            Library-
       - uses: game-ci/unity-builder@v2.1.0
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
